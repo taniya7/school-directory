@@ -19,14 +19,6 @@ const pool = mysql.createPool({
   queueLimit: 0,
 });
 
-pool.connect((err) => {
-  if (err) {
-    console.log("Database connection failed : ", err);
-    return;
-  }
-  console.log("Connected to MySQL database.");
-});
-
 app.get("/schools", async (req, res) => {
   try {
     const [rows] = await pool.query("SELECT * FROM schools");
