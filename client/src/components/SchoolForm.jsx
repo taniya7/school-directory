@@ -49,6 +49,7 @@ const SchoolForm = () => {
     const file = e.target.files?.[0];
     if (file) {
       setImageFile(file);
+      console.log(imageFile);
       const reader = new FileReader();
       reader.onloadend = () => {
         setImagePreview(reader.result);
