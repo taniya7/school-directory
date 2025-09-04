@@ -5,10 +5,8 @@ import SchoolCard from "../components/SchoolCard";
 import Layout from "../components/Layout";
 
 const ShowSchools = () => {
-  const { schools, fetchSchools } = useSchoolStore((state) => ({
-    schools: state.schools,
-    fetchSchools: state.fetchSchools,
-  }));
+  const schools = useSchoolStore((state) => state.schools);
+  const fetchSchools = useSchoolStore((state) => state.fetchSchools);
 
   const [searchTerm, setSearchTerm] = useState("");
 
