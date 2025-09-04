@@ -63,17 +63,23 @@ const SchoolForm = () => {
       return;
     }
     setIsSubmitting(true);
+    console.log("Submitting school:", data);
+    console.log("Image preview:", imagePreview);
 
     setTimeout(() => {
       const newSchool = {
         ...data,
         image: imagePreview,
       };
+
+      console.log("New school object:", newSchool);
       addSchool(newSchool);
+      console.log("addSchool called");
       setIsSubmitting(false);
       setIsSuccess(true);
 
       setTimeout(() => {
+        console.log("Resetting form and navigating...");
         reset();
         setImagePreview(null);
         setImageFile(null);
@@ -82,6 +88,7 @@ const SchoolForm = () => {
       }, 2000);
     }, 1000);
   };
+  console.log("Form errors:", errors);
   return (
     <div className="max-w-3xl mx-auto bg-white rounded-lg shadow-md p-6">
       <h2 className="text-2xl font-bold text-gray-800 mb-6">Add New School</h2>
