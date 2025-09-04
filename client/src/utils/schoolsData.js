@@ -8,7 +8,7 @@ export const useSchoolStore = create((set, get) => ({
   fetchSchools: async () => {
     try {
       const res = await axios.get(`${API_URL}/schools`);
-      set({ schools: res.data });
+      set({ schools: res.data.data });
     } catch (err) {
       console.error("Error fetching schools:", err);
     }
@@ -16,7 +16,7 @@ export const useSchoolStore = create((set, get) => ({
   addSchool: async (school) => {
     try {
       const res = await axios.post(`${API_URL}/schools`, school);
-      set({ schools: [...get().schools, res.data] });
+      set({ schools: [...get().schools, res.data.data] });
     } catch (err) {
       console.error("Error adding school:", err);
     }
