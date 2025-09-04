@@ -12,7 +12,7 @@ const ShowSchools = () => {
 
   useEffect(() => {
     fetchSchools();
-  }, [fetchSchools]);
+  }, []);
 
   const filteredSchools = schools.filter(
     (school) =>
