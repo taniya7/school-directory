@@ -8,7 +8,7 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-const db = mysql.createConnection({
+const pool = mysql.createPool({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASS,
@@ -25,18 +25,29 @@ db.connect((err) => {
 });
 
 app.get("/schools", async (req, res) => {
-  const [rows] = await pool.query("SELECT * FROM schools");
-  res.status(200).json({ data: rows });
+  try {
+    const [rows] = await pool.query("SELECT * FROM schools");
+    res.status(200).json({ data: rows });
+  } catch (err) {
+    console.error("Error fetching schools:", err);
+    res.status(500).json({ error: "Database error" });
+  }
 });
 
 app.post("/schools", async (req, res) => {
-  const { name, email, phone, address, city, state, zipCode, image } = req.body;
-  await pool.query(
-    `INSERT INTO schools (name,email,phone,address,city,state,zipCode,image) 
-     VALUES (?,?,?,?,?,?,?,?)`,
-    [name, email, phone, address, city, state, zipCode, image]
-  );
-  res.status(201).json({ data: "School added" });
+  try {
+    const { name, email, phone, address, city, state, zipCode, image } =
+      req.body;
+    await pool.query(
+      `INSERT INTO schools (name,email,phone,address,city,state,zipCode,image) 
+       VALUES (?,?,?,?,?,?,?,?)`,
+      [name, email, phone, address, city, state, zipCode, image]
+    );
+    res.status(201).json({ message: "School added successfully" });
+  } catch (err) {
+    console.error("Error adding school:", err);
+    res.status(500).json({ error: "Database error" });
+  }
 });
 
 // Server start
