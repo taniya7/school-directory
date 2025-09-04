@@ -31,12 +31,12 @@ app.get("/schools", async (req, res) => {
 
 app.post("/schools", async (req, res) => {
   try {
-    const { name, email, phone, address, city, state, zipCode, image } =
+    const { name, email, contact, address, city, state, pinCode, image } =
       req.body;
     await pool.query(
-      `INSERT INTO schools (name,email,phone,address,city,state,zipCode,image) 
+      `INSERT INTO schools (name,email,contact,address,city,state,pinCode,image) 
        VALUES (?,?,?,?,?,?,?,?)`,
-      [name, email, phone, address, city, state, zipCode, image]
+      [name, email, contact, address, city, state, pinCode, image]
     );
     res.status(201).json({ message: "School added successfully" });
   } catch (err) {

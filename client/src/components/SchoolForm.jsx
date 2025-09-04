@@ -62,7 +62,7 @@ const SchoolForm = () => {
       return;
     }
     setIsSubmitting(true);
-    // Simulate API call delay
+
     setTimeout(() => {
       const newSchool = {
         ...data,
@@ -71,7 +71,7 @@ const SchoolForm = () => {
       addSchool(newSchool);
       setIsSubmitting(false);
       setIsSuccess(true);
-      // Reset form after success
+
       setTimeout(() => {
         reset();
         setImagePreview(null);
